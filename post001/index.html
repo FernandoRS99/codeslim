@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Experimente h1 e p em HTML: código completo para copiar, baixar e abrir no navegador.">
+<title>Sua primeira página começa aqui · CodeSlim</title><style>
+:root{color-scheme:dark;--bg:#0b1019;--panel:#131c2b;--line:#354055;--muted:#bec9dc;--orange:#ffae76}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f3f5fa;font:18px/1.65 'Segoe UI',Arial,sans-serif}
+main,header,footer{max-width:1140px;margin:auto;padding:28px}header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}
+a{color:var(--orange);text-underline-offset:4px}.brand{font-size:25px;font-weight:750;text-decoration:none;color:#f3f5fa}.brand span{color:var(--orange)}
+.eyebrow{color:var(--orange);font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-top:32px}
+h1{font-size:clamp(36px,6vw,64px);letter-spacing:-2px;line-height:1.12;margin:18px 0 24px}h2{font-size:27px;line-height:1.25}p{max-width:760px}.lead{font-size:22px;color:var(--muted)}
+.banner{display:block;width:100%;height:auto;border-radius:18px;margin:36px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:30px 0}
+.panel{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#080c13;padding:22px;border-radius:12px;font:15px/1.8 Consolas,monospace}
+code{color:#ffd3b4}button,.button{display:inline-block;border:1px solid var(--orange);border-radius:8px;background:var(--orange);color:#141821;padding:10px 18px;font:600 16px 'Segoe UI',sans-serif;cursor:pointer;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:3px solid white;outline-offset:5px}.links{display:flex;gap:16px;flex-wrap:wrap;align-items:center}iframe{width:100%;min-height:240px;border:0;background:white;border-radius:8px;color-scheme:light}
+.muted{color:var(--muted);font-size:15px}footer{margin-top:28px;border-top:1px solid var(--line);color:var(--muted);font-size:15px}li{margin:12px 0}section{scroll-margin-top:20px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}main,header,footer{padding:20px}header{gap:15px;flex-wrap:wrap}pre{font-size:14px;padding:14px}.lead{font-size:19px}}
+</style></head>
+<body><header><a class="brand" href="../">&lt;/&gt; Code<span>Slim</span></a><a href="#codigo">Ir para o código</a></header>
+<main><p class="eyebrow">Front-end / HTML</p><h1>Sua primeira página<br>começa aqui.</h1>
+<p class="lead">HTML organiza o conteúdo de uma página. Comece com um título e um parágrafo; depois troque os textos e veja o resultado.</p>
+<img class="banner" src="post001.png" width="1600" height="1000" alt="Banner escuro do CodeSlim. O código usa h1 para Minha primeira página e p para Estou aprendendo HTML com o CodeSlim. Ao lado, um painel branco ilustra o título em destaque e o parágrafo abaixo.">
+<div class="grid"><section class="panel"><h2>O que cada tag faz?</h2>
+<p><code>&lt;h1&gt;</code> marca o título principal deste exemplo.</p><p><code>&lt;p&gt;</code> marca um parágrafo.</p>
+<p>A tag de abertura inicia o elemento; a de fechamento usa uma barra, como <code>&lt;/p&gt;</code>.</p></section>
+<section class="panel"><h2>Como experimentar</h2><ol><li>Copie o documento completo abaixo.</li><li>Salve como <code>index.html</code> em um editor de texto, com codificação UTF-8.</li><li>Abra o arquivo no navegador.</li><li>Troque os textos de h1 e p, salve e atualize a página.</li></ol></section></div>
+<section class="panel" id="codigo"><h2>Documento completo</h2><p>O <code>head</code> reúne informações do documento; o <code>body</code> contém o conteúdo exibido na página.</p>
+<div class="links"><button id="copiar" type="button">Copiar código</button><a href="exemplo.html" download="index.html">Baixar HTML</a><span id="status" role="status" aria-live="polite"></span></div>
+<pre tabindex="0" aria-label="Código HTML completo"><code id="fonte">&lt;!doctype html&gt;
+&lt;html lang=&quot;pt-BR&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+    &lt;title&gt;Minha primeira página&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Minha primeira página&lt;/h1&gt;
+    &lt;p&gt;Estou aprendendo HTML com o CodeSlim.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></section>
+<section class="panel" style="margin-top:24px"><h2>Resultado funcionando</h2><p class="muted">O exemplo HTML abaixo é carregado em uma área separada, com a aparência padrão do navegador.</p>
+<iframe src="exemplo.html" title="Resultado do exemplo: título e parágrafo" sandbox=""></iframe>
+<p><a href="exemplo.html" target="_blank" rel="noopener">Abrir o exemplo em outra aba ↗</a></p></section>
+<p class="muted">Referência: <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">MDN Web Docs — Basic HTML syntax</a>.</p>
+</main><footer><a href="../">← Mais exemplos do CodeSlim</a></footer><script>
+document.getElementById('copiar').addEventListener('click', async () => {
+  const code = document.getElementById('fonte');
+  const status = document.getElementById('status');
+  try {
+    await navigator.clipboard.writeText(code.textContent);
+    status.textContent = 'Código copiado!';
+  } catch {
+    const range = document.createRange();
+    range.selectNodeContents(code);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    status.textContent = 'Código selecionado. Use Ctrl+C ou a opção Copiar do dispositivo.';
+  }
+});
+</script></body></html>
