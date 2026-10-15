@@ -14,6 +14,7 @@ h1{font-size:clamp(36px,6vw,64px);letter-spacing:-2px;line-height:1.12;margin:18
 code{color:#ffd3b4}button,.button{display:inline-block;border:1px solid var(--orange);border-radius:8px;background:var(--orange);color:#141821;padding:10px 18px;font:600 16px 'Segoe UI',sans-serif;cursor:pointer;text-decoration:none}
 a:focus-visible,button:focus-visible{outline:3px solid white;outline-offset:5px}.links{display:flex;gap:16px;flex-wrap:wrap;align-items:center}iframe{width:100%;min-height:240px;border:0;background:white;border-radius:8px;color-scheme:light}
 .muted{color:var(--muted);font-size:15px}footer{margin-top:28px;border-top:1px solid var(--line);color:var(--muted);font-size:15px}li{margin:12px 0}section{scroll-margin-top:20px}
+textarea{display:block;width:100%;min-height:440px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:18px;background:#080c13;color:#ffd3b4;font:15px/1.8 Consolas,monospace;tab-size:2;margin:14px 0}textarea:focus-visible{outline:3px solid var(--orange);outline-offset:3px}.editor-grid{align-items:start}.editor-grid iframe{min-height:440px}.secondary{background:transparent;color:var(--orange)}label{font-weight:600}
 @media(max-width:760px){.grid{grid-template-columns:1fr}main,header,footer{padding:20px}header{gap:15px;flex-wrap:wrap}pre{font-size:14px;padding:14px}.lead{font-size:19px}}
 </style></head>
 <body><header><a class="brand" href="../">&lt;/&gt; Code<span>Slim</span></a><a href="#codigo">Ir para o código</a></header>
@@ -23,10 +24,12 @@ a:focus-visible,button:focus-visible{outline:3px solid white;outline-offset:5px}
 <div class="grid"><section class="panel"><h2>O que cada tag faz?</h2>
 <p><code>&lt;h1&gt;</code> marca o título principal deste exemplo.</p><p><code>&lt;p&gt;</code> marca um parágrafo.</p>
 <p>A tag de abertura inicia o elemento; a de fechamento usa uma barra, como <code>&lt;/p&gt;</code>.</p></section>
-<section class="panel"><h2>Como experimentar</h2><ol><li>Copie o documento completo abaixo.</li><li>Salve como <code>index.html</code> em um editor de texto, com codificação UTF-8.</li><li>Abra o arquivo no navegador.</li><li>Troque os textos de h1 e p, salve e atualize a página.</li></ol></section></div>
-<section class="panel" id="codigo"><h2>Documento completo</h2><p>O <code>head</code> reúne informações do documento; o <code>body</code> contém o conteúdo exibido na página.</p>
-<div class="links"><button id="copiar" type="button">Copiar código</button><a href="exemplo.html" download="index.html">Baixar HTML</a><span id="status" role="status" aria-live="polite"></span></div>
-<pre tabindex="0" aria-label="Código HTML completo"><code id="fonte">&lt;!doctype html&gt;
+<section class="panel"><h2>Como experimentar</h2><ol><li>Altere os textos de <code>h1</code> e <code>p</code> no editor abaixo.</li><li>Veja o resultado atualizar enquanto você digita.</li><li>Copie ou baixe sua versão para continuar no computador.</li><li>Use “Restaurar exemplo” para começar novamente.</li></ol></section></div>
+<section id="codigo"><h2>Experimente ao vivo</h2><p>O <code>head</code> reúne informações do documento; o <code>body</code> contém o conteúdo exibido na página.</p>
+<p class="muted" id="editor-ajuda">Edite o HTML e veja o resultado abaixo ou ao lado. Suas alterações ficam apenas nesta página e são descartadas ao recarregar. Este exemplo permite HTML e CSS; scripts e recursos externos não são executados na prévia.</p>
+<div class="links"><button id="copiar" type="button">Copiar código</button><button id="baixar" type="button">Baixar meu HTML</button><button id="restaurar" class="secondary" type="button">Restaurar exemplo</button></div>
+<p id="status" role="status" aria-live="polite"></p>
+<div class="grid editor-grid"><div class="panel"><label for="editor">Seu código HTML</label><textarea id="editor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="editor-ajuda">&lt;!doctype html&gt;
 &lt;html lang=&quot;pt-BR&quot;&gt;
   &lt;head&gt;
     &lt;meta charset=&quot;utf-8&quot;&gt;
@@ -38,25 +41,53 @@ a:focus-visible,button:focus-visible{outline:3px solid white;outline-offset:5px}
     &lt;p&gt;Estou aprendendo HTML com o CodeSlim.&lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;
-</code></pre></section>
-<section class="panel" style="margin-top:24px"><h2>Resultado funcionando</h2><p class="muted">O exemplo HTML abaixo é carregado em uma área separada, com a aparência padrão do navegador.</p>
-<iframe src="exemplo.html" title="Resultado do exemplo: título e parágrafo" sandbox=""></iframe>
-<p><a href="exemplo.html" target="_blank" rel="noopener">Abrir o exemplo em outra aba ↗</a></p></section>
+</textarea>
+<noscript>Ative o JavaScript para editar a prévia ao vivo. Você pode baixar o exemplo original pelo link abaixo.</noscript></div>
+<div class="panel"><h3>Seu resultado</h3><iframe id="resultado" src="exemplo.html" title="Resultado do HTML editado" sandbox="" referrerpolicy="no-referrer"></iframe></div></div>
+<p><a href="exemplo.html" download="index.html">Baixar exemplo original</a> · <a href="exemplo.html" target="_blank" rel="noopener">Abrir exemplo original ↗</a></p></section>
 <p class="muted">Referência: <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">MDN Web Docs — Basic HTML syntax</a>.</p>
 </main><footer><a href="../">← Mais exemplos do CodeSlim</a></footer><script>
+const editor = document.getElementById('editor');
+const preview = document.getElementById('resultado');
+const original = editor.value;
+const status = document.getElementById('status');
+const previewPolicy = `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; form-action 'none'; base-uri 'none'">`;
+let updateTimer;
+function render() {
+  preview.srcdoc = previewPolicy + editor.value;
+}
+editor.addEventListener('input', () => {
+  status.textContent = '';
+  clearTimeout(updateTimer);
+  updateTimer = setTimeout(render, 150);
+});
+document.getElementById('restaurar').addEventListener('click', () => {
+  clearTimeout(updateTimer);
+  editor.value = original;
+  render();
+  status.textContent = 'Exemplo original restaurado.';
+});
+document.getElementById('baixar').addEventListener('click', () => {
+  const blob = new Blob([editor.value], {type: 'text/html;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'index.html';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  status.textContent = 'Download do seu HTML solicitado.';
+});
 document.getElementById('copiar').addEventListener('click', async () => {
-  const code = document.getElementById('fonte');
-  const status = document.getElementById('status');
   try {
-    await navigator.clipboard.writeText(code.textContent);
+    await navigator.clipboard.writeText(editor.value);
     status.textContent = 'Código copiado!';
   } catch {
-    const range = document.createRange();
-    range.selectNodeContents(code);
-    const selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
+    editor.focus();
+    editor.select();
     status.textContent = 'Código selecionado. Use Ctrl+C ou a opção Copiar do dispositivo.';
   }
 });
+render();
 </script></body></html>
